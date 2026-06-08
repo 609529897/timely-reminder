@@ -20,7 +20,7 @@
       </div>
       <div class="header-actions">
         <span class="badge" id="reminderCount">0</span>
-        <button class="btn-add" id="toggleForm" title="新建循环">
+        <button class="btn-add" id="toggleForm" aria-label="新建循环" title="新建循环">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
       </div>
@@ -34,54 +34,55 @@
       <div id="reminderList" class="reminder-list"></div>
     </section>
 
-    <!-- Modal overlay -->
-    <div class="modal-overlay" id="modalOverlay">
+    <!-- M3 Dialog -->
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal" id="modal">
         <form id="cycleForm" class="modal-form" autocomplete="off">
           <div class="modal-header">
-            <span class="modal-title">新建专注循环</span>
-            <button type="button" class="modal-close" id="closeModal">
+            <span class="modal-title" id="modalTitle">新建专注循环</span>
+            <button type="button" class="modal-close" id="closeModal" aria-label="关闭">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
           </div>
 
           <div class="modal-body">
             <div class="field">
-              <div class="field-label">专注内容</div>
+              <label class="field-label" for="msgInput">专注内容</label>
               <input type="text" id="msgInput" class="input" placeholder="留空则显示「专注时间」" maxlength="200" />
             </div>
 
-            <div class="timer-config">
+            <fieldset class="timer-config">
+              <legend class="sr-only">计时设置</legend>
               <div class="config-col">
-                <div class="col-label">🎯 工作</div>
+                <span class="col-label">🎯 工作</span>
                 <div class="num-stepper">
-                  <button type="button" class="step" data-id="workVal">−</button>
+                  <button type="button" class="step" data-id="workVal" aria-label="减少工作分钟">−</button>
                   <input type="number" id="workVal" class="num-input" value="25" min="1" max="180" />
-                  <button type="button" class="step" data-id="workVal">+</button>
+                  <button type="button" class="step" data-id="workVal" aria-label="增加工作分钟">+</button>
                 </div>
-                <div class="col-unit">分钟</div>
+                <span class="col-unit">分钟</span>
               </div>
-              <div class="config-divider">
+              <div class="config-divider" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </div>
               <div class="config-col">
-                <div class="col-label">☕ 休息</div>
+                <span class="col-label">☕ 休息</span>
                 <div class="num-stepper">
-                  <button type="button" class="step" data-id="restVal">−</button>
+                  <button type="button" class="step" data-id="restVal" aria-label="减少休息分钟">−</button>
                   <input type="number" id="restVal" class="num-input" value="5" min="1" max="60" />
-                  <button type="button" class="step" data-id="restVal">+</button>
+                  <button type="button" class="step" data-id="restVal" aria-label="增加休息分钟">+</button>
                 </div>
-                <div class="col-unit">分钟</div>
+                <span class="col-unit">分钟</span>
               </div>
-            </div>
+            </fieldset>
 
             <div class="cycles-row">
               <div class="cycles-left">
                 <span class="cycles-label">循环</span>
                 <div class="num-stepper xs">
-                  <button type="button" class="step xs" data-id="cycleVal">−</button>
+                  <button type="button" class="step xs" data-id="cycleVal" aria-label="减少循环次数">−</button>
                   <input type="number" id="cycleVal" class="num-input xs" value="4" min="1" max="999" />
-                  <button type="button" class="step xs" data-id="cycleVal">+</button>
+                  <button type="button" class="step xs" data-id="cycleVal" aria-label="增加循环次数">+</button>
                 </div>
               </div>
               <label class="inf-toggle">
@@ -93,7 +94,7 @@
               </label>
             </div>
 
-            <div id="totalInfo" class="total-info">预计 2 小时</div>
+            <div id="totalInfo" class="total-info" aria-live="polite">预计 2 小时</div>
 
             <label class="switch-row">
               <span class="switch-label">🔊 声音提醒</span>
