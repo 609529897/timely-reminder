@@ -10,34 +10,35 @@
     top: '24px',
     right: '24px',
     zIndex: '2147483647',
-    borderRadius: '12px',
-    background: 'linear-gradient(135deg, #5b5fe7, #7c3aed)',
+    borderRadius: '14px',
+    background: '#0071e3',
     color: '#fff',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif',
-    lineHeight: '1.5',
-    boxShadow: '0 8px 28px rgba(91,95,231,0.25)',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", sans-serif',
+    lineHeight: '1.47059',
+    boxShadow: '0 8px 30px rgba(0,113,227,0.22), 0 2px 8px rgba(0,0,0,0.06)',
     opacity: '0',
     transform: 'translateY(-8px)',
-    transition: 'opacity 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1)',
+    transition: 'opacity 0.25s ease, transform 0.3s cubic-bezier(0.25,0.01,0.25,1)',
     cursor: 'pointer',
     pointerEvents: 'auto',
     overflow: 'hidden',
-    userSelect: 'none'
+    userSelect: 'none',
+    WebkitFontSmoothing: 'antialiased'
   };
 
   const innerStyles = {
-    padding: '11px 16px',
+    padding: '12px 18px',
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
     fontSize: '13px',
     fontWeight: '500',
-    letterSpacing: '0.15px'
+    letterSpacing: '0'
   };
 
   const closeStyles = {
-    fontSize: '14px', opacity: '0.4', flexShrink: '0', lineHeight: '1',
-    padding: '2px', transition: 'opacity 0.15s', marginLeft: '2px'
+    fontSize: '12px', opacity: '0.5', flexShrink: '0', lineHeight: '1',
+    padding: '2px', transition: 'opacity 0.15s', marginLeft: '4px', fontWeight: '300'
   };
 
   function fmtCountdown(ms) {
@@ -99,7 +100,7 @@
 
     if (stay) {
       const bar = Object.assign(document.createElement('div'), {});
-      Object.assign(bar.style, { height: '2px', background: 'rgba(255,255,255,0.12)', overflow: 'hidden' });
+      Object.assign(bar.style, { height: '2px', background: 'rgba(255,255,255,0.15)', overflow: 'hidden' });
       const fill = Object.assign(document.createElement('div'), {});
       Object.assign(fill.style, { height: '100%', width: '0%', background: 'rgba(255,255,255,0.45)', transition: 'width 1s linear' });
       bar.appendChild(fill);
@@ -129,7 +130,7 @@
       val += 0.06 * dir;
       if (val >= 1) { val = 1; dir = -1; }
       if (val <= 0) { val = 0; dir = 1; }
-      el.style.boxShadow = `0 8px 28px rgba(91,95,231,${0.15 + val * 0.2})`;
+      el.style.boxShadow = `0 8px 30px rgba(0,113,227,${0.12 + val * 0.18})`;
     }, 500);
   }
 

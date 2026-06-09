@@ -51,12 +51,12 @@ document.addEventListener('click', e => {
 function updateTotal() {
   const w = parseInt(el.workVal.value) || 25;
   const r = parseInt(el.restVal.value) || 5;
-  if (el.infiniteToggle.checked) { el.totalInfo.textContent = '♾️ 无限循环'; return; }
+  if (el.infiniteToggle.checked) { el.totalInfo.textContent = '无限循环'; return; }
   const c = parseInt(el.cycleVal.value) || 4;
   const t = (w + r) * c;
   const h = Math.floor(t / 60);
   const m = t % 60;
-  el.totalInfo.textContent = h > 0 ? `预计 ${h}h${m > 0 ? ` ${m}min` : ''}` : `预计 ${m}min`;
+  el.totalInfo.textContent = h > 0 ? `约 ${h} 小时${m > 0 ? ` ${m} 分钟` : ''}` : `约 ${m} 分钟`;
 }
 
 [el.workVal, el.restVal, el.cycleVal, el.infiniteToggle].forEach(el_ => {
