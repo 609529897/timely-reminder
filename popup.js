@@ -140,14 +140,18 @@ async function render() {
       const inf = r.infinite;
       const cl = inf ? `第 ${r.currentCycle || 1} 轮` : `第 ${r.currentCycle || 1}/${r.cycles || 1} 轮`;
       return `
-        <div class="card phase-${ph} ${t.x ? 'pulse' : ''}" data-id="${id}">
+        <div class="card ${t.x ? 'pulse' : ''}" data-id="${id}">
           <div class="card-body">
             <div class="card-top">
               <span class="card-msg">
-                <span class="ph-dot ph-${ph}"></span>
                 ${esc(r.message || '专注时间')}
               </span>
-              <button class="cxl" data-id="${id}">✕</button>
+              <span class="card-actions">
+                <button class="crst" data-id="${id}" aria-label="重置计时">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                </button>
+                <button class="cxl" data-id="${id}">✕</button>
+              </span>
             </div>
             <div class="card-meta">
               <span class="ph-badge ph-${ph}">${ph === 'work' ? '🎯' : '☕'} ${ph === 'work' ? '工作' : '休息'}</span>
@@ -181,6 +185,18 @@ async function startCycle(msg, work, rest, cycles, infinite, sound) {
     sound
   };
   chrome.alarms.create(id, { delayInMinutes: work });
+  await set(data);
+  await render();
+}
+
+async function resetTimer(id) {
+  const data = await get();
+  const r = data[id];
+  if (!r) return;
+  const mins = r.phase === 'work' ? r.workMinutes : r.restMinutes;
+  r.createdAt = Date.now();
+  chrome.alarms.clear(id);
+  chrome.alarms.create(id, { delayInMinutes: mins });
   await set(data);
   await render();
 }
@@ -228,6 +244,8 @@ el.cycleForm.addEventListener('submit', async (e) => {
 el.reminderList.addEventListener('click', async (e) => {
   const x = e.target.closest('.cxl');
   if (x) await cancel(x.dataset.id);
+  const rst = e.target.closest('.crst');
+  if (rst) await resetTimer(rst.dataset.id);
 });
 
 el.clearAll.addEventListener('click', clearAll);

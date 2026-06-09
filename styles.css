@@ -215,7 +215,7 @@ body {
 .reminder-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .card {
@@ -223,17 +223,7 @@ body {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.card.phase-work {
-  border-left: 3px solid var(--primary);
-}
-
-.card.phase-rest {
-  border-left: 3px solid var(--rest);
+  transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
 .card:hover {
@@ -251,48 +241,65 @@ body {
 }
 
 .card-body {
-  padding: 16px;
+  padding: 10px 12px;
 }
 
 .card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
+  gap: 4px;
 }
 
 .card-msg {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   word-break: break-word;
   flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-/* ── Close ── */
+/* ── Card Actions ── */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s var(--ease);
+}
+
+.card:hover .card-actions,
+.card:focus-within .card-actions {
+  opacity: 1;
+}
+
+.crst,
 .cxl {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   border: none;
   border-radius: 50%;
   background: transparent;
-  color: var(--text-tertiary);
-  font-size: 11px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  transition: opacity 0.15s var(--ease), color 0.15s var(--ease), background 0.15s var(--ease);
-  opacity: 0;
+  transition: color 0.15s var(--ease), background 0.15s var(--ease);
 }
 
-.card:hover .cxl,
-.card:focus-within .cxl {
-  opacity: 1;
+.crst {
+  color: var(--text-tertiary);
+}
+
+.crst:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.cxl {
+  color: var(--text-tertiary);
+  font-size: 11px;
 }
 
 .cxl:hover {
@@ -305,15 +312,15 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .card-time {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--text);
   font-variant-numeric: tabular-nums;
-  margin-top: 10px;
+  margin-top: 4px;
   letter-spacing: -0.5px;
   line-height: 1.1;
 }
@@ -324,9 +331,9 @@ body {
 
 /* ── Phase Badge ── */
 .ph-badge {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  padding: 2px 10px;
+  padding: 1px 8px;
   border-radius: var(--radius-pill);
   display: inline-flex;
   align-items: center;
@@ -365,17 +372,17 @@ body {
 
 /* ── Progress Bar ── */
 .bar {
-  height: 4px;
+  height: 3px;
   background: var(--bg);
   border-radius: 2px;
-  margin-top: 12px;
+  margin-top: 6px;
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
   border-radius: 2px;
-  transition: width 1s linear;
+  transition: width 1s cubic-bezier(0.25, 0.01, 0.25, 1);
 }
 
 .bar-work { background: var(--primary); }
@@ -385,7 +392,6 @@ body {
 /* ── Dead ── */
 .card.dead {
   opacity: 0.6;
-  border-left: 3px solid var(--text-tertiary);
 }
 
 .dead-badge {
@@ -403,18 +409,20 @@ body {
 
 .empty {
   text-align: center;
-  padding: 60px 16px 40px;
+  padding: 56px 16px 40px;
 }
 
 .empty-icon {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   color: var(--text-tertiary);
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
 .empty-icon svg {
   display: block;
   margin: 0 auto;
+  width: 40px;
+  height: 40px;
 }
 
 .empty-title {
@@ -494,7 +502,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 24px 0;
+  padding: 24px 24px 0;
 }
 
 .modal-title {
@@ -505,12 +513,12 @@ body {
 }
 
 .modal-close {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: none;
   border-radius: 50%;
-  background: var(--bg);
-  color: var(--text-secondary);
+  background: transparent;
+  color: var(--text-tertiary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -519,14 +527,14 @@ body {
 }
 
 .modal-close:hover {
-  background: #e8e8ed;
+  background: rgba(0, 0, 0, 0.06);
   color: var(--text);
 }
 
 .modal-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   padding: 24px;
 }
 
@@ -534,24 +542,7 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  padding: 0 24px 28px;
-}
-
-/* ═══════════════════════════════════════════
-   Field
-   ═══════════════════════════════════════════ */
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.field-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  padding-left: 2px;
+  padding: 0 24px 24px;
 }
 
 .input {
@@ -570,7 +561,7 @@ body {
 
 .input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15);
 }
 
 .input::placeholder {
@@ -584,12 +575,10 @@ body {
 
 .timer-config {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  /* gap: 6px; */
   background: var(--bg);
   border-radius: var(--radius-md);
-  padding: 20px 0;
+  padding: 16px 20px;
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
@@ -598,14 +587,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .config-divider {
-  color: var(--text-tertiary);
-  opacity: 0.15;
+  width: 1px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
-  padding: 0 4px;
+  margin: 0 4px;
 }
 
 .col-label {
@@ -618,21 +608,22 @@ body {
   font-size: 11px;
   color: var(--text-tertiary);
   font-weight: 400;
+  line-height: 1;
 }
 
 /* ── Stepper ── */
 .num-stepper {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
 }
 
 .step {
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 30px;
+  height: 30px;
+  border: none;
   border-radius: 50%;
-  background: var(--card-bg);
+  background: transparent;
   color: var(--text-secondary);
   font-size: 18px;
   font-weight: 400;
@@ -640,25 +631,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
   font-family: inherit;
   line-height: 1;
 }
 
 .step:hover {
-  background: #e8e8ed;
+  background: rgba(0, 0, 0, 0.06);
   color: var(--text);
-  border-color: transparent;
 }
 
 .step:active {
-  background: #d1d1d6;
+  background: rgba(0, 0, 0, 0.10);
   transform: scale(0.94);
 }
 
 .step.xs {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   font-size: 16px;
 }
 
@@ -696,7 +686,7 @@ body {
   justify-content: space-between;
   background: var(--bg);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 10px 16px;
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
@@ -784,7 +774,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 2px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -873,7 +862,6 @@ body {
   transition: background 0.2s var(--ease), transform 0.15s var(--ease);
   font-family: inherit;
   letter-spacing: 0.15px;
-  box-shadow: var(--shadow-sm);
 }
 
 .btn-go:hover {

@@ -46,10 +46,7 @@
           </div>
 
           <div class="modal-body">
-            <div class="field">
-              <label class="field-label" for="msgInput">专注内容</label>
-              <input type="text" id="msgInput" class="input" placeholder="留空则显示「专注时间」" maxlength="200" />
-            </div>
+            <input type="text" id="msgInput" class="input" placeholder="专注内容" maxlength="200" />
 
             <fieldset class="timer-config">
               <legend class="sr-only">计时设置</legend>
@@ -62,9 +59,7 @@
                 </div>
                 <span class="col-unit">分钟</span>
               </div>
-              <div class="config-divider" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </div>
+              <div class="config-divider"></div>
               <div class="config-col">
                 <span class="col-label">休息</span>
                 <div class="num-stepper">
@@ -97,7 +92,7 @@
             <div id="totalInfo" class="total-info" aria-live="polite">约 2 小时</div>
 
             <label class="switch-row">
-              <span class="switch-label">🔊 声音提醒</span>
+              <span class="switch-label">声音提醒</span>
               <input type="checkbox" id="soundToggle" checked />
               <span class="switch-track"></span>
             </label>
@@ -105,10 +100,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn-back" id="cancelForm">返回</button>
-            <button type="submit" class="btn-go" id="submitBtn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              开始专注
-            </button>
+            <button type="submit" class="btn-go" id="submitBtn">开始专注</button>
           </div>
         </form>
       </div>
