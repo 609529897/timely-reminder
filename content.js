@@ -11,14 +11,17 @@
     right: '24px',
     zIndex: '2147483647',
     borderRadius: '14px',
-    background: '#0071e3',
-    color: '#fff',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", sans-serif',
+    background: 'rgba(17,17,26,0.94)',
+    border: '1px solid rgba(255,255,255,0.12)',
+    color: '#f2f2f7',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif',
     lineHeight: '1.47059',
-    boxShadow: '0 8px 30px rgba(0,113,227,0.22), 0 2px 8px rgba(0,0,0,0.06)',
+    backdropFilter: 'blur(20px) saturate(1.3)',
+    WebkitBackdropFilter: 'blur(20px) saturate(1.3)',
+    boxShadow: '0 12px 40px rgba(0,0,0,0.5), 0 2px 10px rgba(0,0,0,0.35)',
     opacity: '0',
     transform: 'translateY(-8px)',
-    transition: 'opacity 0.25s ease, transform 0.3s cubic-bezier(0.25,0.01,0.25,1)',
+    transition: 'opacity 0.25s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1)',
     cursor: 'pointer',
     pointerEvents: 'auto',
     overflow: 'hidden',
@@ -100,9 +103,9 @@
 
     if (stay) {
       const bar = Object.assign(document.createElement('div'), {});
-      Object.assign(bar.style, { height: '2px', background: 'rgba(255,255,255,0.15)', overflow: 'hidden' });
+      Object.assign(bar.style, { height: '2px', background: 'rgba(255,255,255,0.1)', overflow: 'hidden' });
       const fill = Object.assign(document.createElement('div'), {});
-      Object.assign(fill.style, { height: '100%', width: '0%', background: 'rgba(255,255,255,0.45)', transition: 'width 1s linear' });
+      Object.assign(fill.style, { height: '100%', width: '0%', background: 'linear-gradient(90deg,#3d8bff,#8b5cf6,#f2577a)', transition: 'width 1s linear' });
       bar.appendChild(fill);
       c.appendChild(bar);
       startPulse(c);
@@ -130,7 +133,7 @@
       val += 0.06 * dir;
       if (val >= 1) { val = 1; dir = -1; }
       if (val <= 0) { val = 0; dir = 1; }
-      el.style.boxShadow = `0 8px 30px rgba(0,113,227,${0.12 + val * 0.18})`;
+      el.style.boxShadow = `0 12px 40px rgba(139,92,246,${0.25 + val * 0.3})`;
     }, 500);
   }
 

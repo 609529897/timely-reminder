@@ -110,12 +110,13 @@ async function render() {
     el.reminderList.innerHTML = `
       <div class="empty">
         <div class="empty-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>
           </svg>
         </div>
         <p class="empty-title">没有进行中的循环</p>
-        <p class="empty-sub">点击右上角 <span class="empty-plus">+</span> 新建</p>
+        <p class="empty-sub">关掉弹窗，计时也会继续运行</p>
+        <button type="button" class="empty-cta" data-open-modal>新建专注循环</button>
       </div>`;
     return;
   }
@@ -127,7 +128,7 @@ async function render() {
           <span class="card-msg">${esc(data._lastTriggered.message || '专注循环')}</span>
           <button class="cxl" data-id="_lastTriggered">✕</button>
         </div>
-        <div class="card-meta"><span class="p-badge dead-badge">已完成</span></div>
+        <div class="card-meta"><span class="dead-badge">已完成</span></div>
       </div>
     </div>` : '';
 
@@ -148,7 +149,7 @@ async function render() {
               </span>
               <span class="card-actions">
                 <button class="crst" data-id="${id}" aria-label="重置计时">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
                 </button>
                 <button class="cxl" data-id="${id}">✕</button>
               </span>
@@ -159,9 +160,8 @@ async function render() {
               ${inf ? '<span class="inf-badge">∞</span>' : ''}
               ${r.sound ? '<span class="snd">🔊</span>' : ''}
             </div>
-            <div class="card-time ${t.x ? 'txt-danger' : ''}">${t.t}</div>
-            <div class="bar">
-              <div class="bar-fill ${t.x ? 'bar-danger' : `bar-${ph}`}" style="width:${Math.min(pg,100)}%"></div>
+            <div class="ring ${t.x ? 'ring-danger' : `ring-${ph}`}" style="--p:${Math.min(pg, 100)}">
+              <span class="ring-time ${t.x ? 'txt-danger' : ''}">${t.t}</span>
             </div>
           </div>
         </div>`;
@@ -249,6 +249,11 @@ el.reminderList.addEventListener('click', async (e) => {
 });
 
 el.clearAll.addEventListener('click', clearAll);
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-open-modal]');
+  if (t) openModal();
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
   await render();
